@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="list_vertical_padding">4dp</dimen>
+    <dimen name="list_horizontal_padding">4dp</dimen>
+</resources>

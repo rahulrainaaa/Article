@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="4dp"
+    app:cardPreventCornerOverlap="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_user_photo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/shape_profile_circle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
+            android:capitalize="words"
+            android:text="User name"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:layout_constraintStart_toEndOf="@id/iv_user_photo"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_user_designation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:capitalize="words"
+            android:text="User Designation"
+            app:layout_constraintStart_toStartOf="@id/txt_user_name"
+            app:layout_constraintTop_toBottomOf="@id/txt_user_name" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1 min"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_article_image"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_article_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_user_photo" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_article_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:capitalize="sentences"
+            android:text="Article content goes here..."
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/iv_article_image"
+            app:layout_constraintStart_toStartOf="@id/iv_article_image"
+            app:layout_constraintTop_toBottomOf="@id/iv_article_image" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_article_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:capitalize="sentences"
+            android:text="Article Title Here"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/iv_article_image"
+            app:layout_constraintStart_toStartOf="@id/iv_article_image"
+            app:layout_constraintTop_toBottomOf="@id/txt_article_content" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_likes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="6.5K Likes"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            app:layout_constraintStart_toStartOf="@id/iv_article_image"
+            app:layout_constraintTop_toBottomOf="@id/txt_article_title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_comments"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="236dp"
+            android:text="34 Comments"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_likes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txt_likes" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
