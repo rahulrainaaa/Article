@@ -19,7 +19,7 @@ class ArticleWebRepository {
             setArticleEOF(false)
 
         Log.d("bbbbbbbbbbbbbbbbbbb", "Hitting: Page = $page, Limit = $limit")
-        Log.d("bbbbbbbbbbbbbbbbbbb", "Initially lock = $fetchLock, EOF = $articleEOF")
+        Log.d("bbbbbbbbbbbbbbbbbbb", "Initially lock = ${fetchLock.value}, EOF = ${articleEOF.value}")
 
         if (fetchLock.value == true || articleEOF.value == true)
             return emptyList()
@@ -42,7 +42,7 @@ class ArticleWebRepository {
             article.post_comments = model.comments
             article.post_likes = model.likes
 
-            if (model?.media?.size ?: 0 > 0) {
+            if (model.media?.size ?: 0 > 0) {
 
                 val media = model.media?.get(0)
                 article.media_id = media?.id
@@ -53,8 +53,8 @@ class ArticleWebRepository {
                 article.media_url = media?.url
             }
 
-            if (model?.user?.size ?: 0 > 0) {
-                val user = model?.user?.get(0)
+            if (model.user?.size ?: 0 > 0) {
+                val user = model.user?.get(0)
                 article.user_id = user?.id
                 article.user_blogId = user?.blogId
                 article.user_createdAt = user?.createdAt

@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Article</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_about_us">About Us</string>
 
     <string name="blog">Blog</string>
     <string name="articles">Articles</string>
+
 
 </resources>

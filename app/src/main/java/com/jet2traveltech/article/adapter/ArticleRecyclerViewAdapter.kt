@@ -15,16 +15,19 @@ import com.jet2traveltech.article.utils.StringFormatUtil
 
 /**
  * RecyclerView Adapter class to publish Article list from ArticleRepository.
+ * 1. Show Article Cell using ArticleViewHolder.
+ * 2. Show Progressbar in FooterViewHolder denoting the Web API call.
  *
  * @param context Context to be passed for LayoutInflater object.
  */
-class WordListAdapter(val context: Context, owner: LifecycleOwner) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ArticleRecyclerViewAdapter(val context: Context, owner: LifecycleOwner) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val inflater: LayoutInflater = LayoutInflater.from(context)
-    var articles: List<Article> = emptyList()
-    var isFooterVisible = MutableLiveData(false)
+    private val inflater: LayoutInflater = LayoutInflater.from(context)     // Layout inflater object.
+    var articles: List<Article> = emptyList()                               // List of article(s) to publish.
+    var isFooterVisible = MutableLiveData(false)                     // Denotes to show footer or not.
 
     init {
+        // Observer on isFooterVisible to hide or show in recycler view last cell.
         isFooterVisible.observe(owner, { notifyDataSetChanged() })
     }
 
@@ -38,6 +41,7 @@ class WordListAdapter(val context: Context, owner: LifecycleOwner) : RecyclerVie
     }
 
     override fun getItemViewType(position: Int): Int {
+        // If position exceeds article list size then it will be progress bar footer cell.
         return if (articles.size > position) CellType.ARTICLE_CELL.code
         else CellType.FOOTER_CEL.code
     }
@@ -50,14 +54,15 @@ class WordListAdapter(val context: Context, owner: LifecycleOwner) : RecyclerVie
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
+        // Data only to be updated in case of Article cell.
         if (holder is ArticleViewHolder) holder.setData(articles[position], position)
     }
 
     override fun getItemCount(): Int {
 
         return when {
-            articles.isEmpty() -> 0
-            isFooterVisible.value == true -> articles.size + 1
+            articles.isEmpty() -> 0         // Return 0 if empty.
+            isFooterVisible.value == true -> articles.size + 1     // Return one incremented which includes footer cell as last item.
             else -> articles.size
         }
     }
@@ -96,6 +101,7 @@ class WordListAdapter(val context: Context, owner: LifecycleOwner) : RecyclerVie
             binding.txtTime.text = StringFormatUtil.getElapsedTime(article.user_createdAt!!)
             binding.txtArticleTitle.text = article.media_title ?: "N/A"
 
+            // Hide elements if media is null.
             if (article?.media_createdAt == null) {
                 binding.txtArticleTitle.visibility = View.GONE
                 binding.ivArticleImage.visibility = View.GONE

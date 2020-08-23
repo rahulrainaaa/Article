@@ -7,8 +7,17 @@ import kotlin.math.floor
 import kotlin.math.log10
 import kotlin.math.pow
 
+/**
+ * Utility string for matting class(es).
+ */
 object StringFormatUtil {
 
+    /**
+     * Format given long number into Roman string format.
+     *
+     * @param number long number for be formatted.
+     * @return String containing the formatted value.
+     */
     fun formatCount(number: Long): String? {
         val suffix = charArrayOf(' ', 'k', 'M', 'B', 'T', 'P', 'E')
         val value = floor(log10(number.toDouble())).toInt()
@@ -20,6 +29,12 @@ object StringFormatUtil {
         }
     }
 
+    /**
+     * Format T-Time (ISO time) and calculate the elapsed time in formatted way.
+     *
+     * @param time String denoting the ISO time.
+     * @return String denote total time elapsed since the given time in required format.
+     */
     fun getElapsedTime(time: String): String? {
         val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
         sdf.timeZone = TimeZone.getTimeZone("UTC")
