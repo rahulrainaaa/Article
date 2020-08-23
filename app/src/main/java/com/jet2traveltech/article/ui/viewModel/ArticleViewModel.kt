@@ -11,22 +11,27 @@ import com.jet2traveltech.article.web.article.ArticleWebRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class WordViewModel(application: Application) : AndroidViewModel(application) {
+class ArticleViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository: ArticleRepository
-
+    private val articleRepository: ArticleRepository
+     val articleWebRepository: ArticleWebRepository
     val allArticles: LiveData<List<Article>>
 
     init {
         val wordsDao = ArticleDatabase.getDatabase(application).articleDao()
-        repository = ArticleRepository(wordsDao)
-        allArticles = repository.allWords
+        articleRepository = ArticleRepository(wordsDao)
+        articleWebRepository = ArticleWebRepository()
+        allArticles = articleRepository.allArticles
     }
 
     fun fetchArticles(page: Int, limit: Int) = viewModelScope.launch(Dispatchers.IO) {
-        if (page == 0) repository.deleteAll()
-        val articles = ArticleWebRepository().getArticles(1, 300)
-        repository.insert(articles)
+        if (page <= 1) articleRepository.deleteAll()
+        val articles = articleWebRepository.getArticles(page, limit)
+        articleRepository.insert(articles)
     }
+
+    fun isArticleReachedEof() = articleWebRepository.articleEOF.value
+
+    fun deleteAll() = viewModelScope.launch(Dispatchers.IO) { articleRepository.deleteAll() }
 
 }

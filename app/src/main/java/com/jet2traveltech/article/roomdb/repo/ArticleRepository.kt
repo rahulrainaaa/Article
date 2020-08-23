@@ -6,7 +6,7 @@ import com.jet2traveltech.article.roomdb.dao.ArticleDao
 
 class ArticleRepository(private val articleDao: ArticleDao) {
 
-    val allWords: LiveData<List<Article>> = articleDao.getAlphabetizedWords()
+    val allArticles: LiveData<List<Article>> = articleDao.getAlphabetizedWords()
 
     suspend fun insert(articles: List<Article>) = articleDao.insert(articles)
 

@@ -6,8 +6,8 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.jet2traveltech.article.R
 import com.jet2traveltech.article.databinding.ActivityMainBinding
-import com.jet2traveltech.article.ui.viewModel.WordViewModel
-import com.jet2traveltech.article.ui.viewModel.WordViewModelFactory
+import com.jet2traveltech.article.ui.viewModel.ArticleViewModel
+import com.jet2traveltech.article.ui.viewModel.ArticleViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
-        WordViewModelFactory(application).create(WordViewModel::class.java)
+        ArticleViewModelFactory(application).create(ArticleViewModel::class.java)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

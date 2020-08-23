@@ -1,13 +1,36 @@
 package com.jet2traveltech.article.web.article
 
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
 import com.jet2traveltech.article.model.Article
 import com.jet2traveltech.article.web.client.RetrofitClientBuilder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class ArticleWebRepository {
 
+    private var fetchLock = MutableLiveData(false)
+    val articleEOF = MutableLiveData(false)
+
     suspend fun getArticles(page: Int, limit: Int): List<Article> {
+
+        if (page <= 1 && fetchLock.value == false)
+            setArticleEOF(false)
+
+        Log.d("bbbbbbbbbbbbbbbbbbb", "Hitting: Page = $page, Limit = $limit")
+        Log.d("bbbbbbbbbbbbbbbbbbb", "Initially lock = $fetchLock, EOF = $articleEOF")
+
+        if (fetchLock.value == true || articleEOF.value == true)
+            return emptyList()
+
+        setFetchLock(true)
+
+        Log.d("bbbbbbbbbbbbbbbbbbb", "Fetching: Page = $page, Limit = $limit")
         val response = RetrofitClientBuilder.articleWebService.getArticles(page, limit)
 
+        Log.d("bbbbbbbbbbbbbbbbbbb", Gson().toJson(response))
+        Log.d("bbbbbbbbbbbbbbbbbbb", "Size = ${response.size}")
         val articleList = ArrayList<Article>()
 
         for (model in response) {
@@ -46,7 +69,18 @@ class ArticleWebRepository {
             articleList.add(article)
         }
 
-        return articleList
+        if (articleList.isEmpty())
+            setArticleEOF(true)
 
+        setFetchLock(false)
+        return articleList
+    }
+
+    private suspend fun setArticleEOF(status: Boolean) = withContext(Dispatchers.Main) {
+        articleEOF.value = status
+    }
+
+    private suspend fun setFetchLock(status: Boolean) = withContext(Dispatchers.Main) {
+        fetchLock.value = status
     }
 }
