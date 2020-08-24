@@ -49,8 +49,8 @@ class ArticleListFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-                outRect.left = 16
-                outRect.right = 16
+                outRect.left = 20
+                outRect.right = 20
                 outRect.top = 16
                 outRect.bottom = 16
             }

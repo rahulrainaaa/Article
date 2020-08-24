@@ -100,6 +100,7 @@ class ArticleRecyclerViewAdapter(val context: Context, owner: LifecycleOwner) : 
             binding.txtComments.text = StringFormatUtil.formatCount(article.post_comments!!) + " Comments"
             binding.txtTime.text = StringFormatUtil.getElapsedTime(article.user_createdAt!!)
             binding.txtArticleTitle.text = article.media_title ?: "N/A"
+            
             Glide.with(context)
                 .load(article.user_avatar)
                 .into(binding.ivUserPhoto)
