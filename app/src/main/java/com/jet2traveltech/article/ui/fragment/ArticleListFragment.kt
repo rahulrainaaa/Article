@@ -2,13 +2,13 @@ package com.jet2traveltech.article.ui.fragment
 
 import android.graphics.Rect
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.jet2traveltech.article.R
 import com.jet2traveltech.article.adapter.ArticleRecyclerViewAdapter
 import com.jet2traveltech.article.databinding.FragmentArticleListBinding
 import com.jet2traveltech.article.ui.viewModel.ArticleViewModel
@@ -35,7 +35,20 @@ class ArticleListFragment : Fragment() {
         binding = FragmentArticleListBinding.inflate(inflater, container, false)
         // Create ViewModel for the fragment.
         viewModel = ViewModelProvider(this).get(ArticleViewModel::class.java).initialize(requireActivity().application)
+        setHasOptionsMenu(true)
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_about_us -> requireActivity().findNavController(R.id.nav_host_fragment).navigate(R.id.AboutUsFragment)
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
