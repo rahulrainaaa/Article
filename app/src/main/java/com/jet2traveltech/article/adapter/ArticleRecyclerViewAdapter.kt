@@ -1,6 +1,8 @@
 package com.jet2traveltech.article.adapter
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +14,7 @@ import com.jet2traveltech.article.databinding.RvCellArticeBinding
 import com.jet2traveltech.article.databinding.RvCellProgressBinding
 import com.jet2traveltech.article.model.Article
 import com.jet2traveltech.article.utils.StringFormatUtil
+
 
 /**
  * RecyclerView Adapter class to publish Article list from ArticleRepository.
@@ -47,9 +50,11 @@ class ArticleRecyclerViewAdapter(val context: Context, owner: LifecycleOwner) : 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return if (viewType == CellType.ARTICLE_CELL.code)
-            ArticleViewHolder(RvCellArticeBinding.inflate(inflater, parent, false))
-        else FooterViewHolder(RvCellProgressBinding.inflate(inflater, parent, false))
+        return if (viewType == CellType.ARTICLE_CELL.code) {
+            val binding = RvCellArticeBinding.inflate(inflater, parent, false)
+            binding.btnOpenUrl.setOnClickListener(onBtnOpenUrlClickEvent)
+            ArticleViewHolder(binding)
+        } else FooterViewHolder(RvCellProgressBinding.inflate(inflater, parent, false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -100,22 +105,31 @@ class ArticleRecyclerViewAdapter(val context: Context, owner: LifecycleOwner) : 
             binding.txtComments.text = StringFormatUtil.formatCount(article.post_comments!!) + " Comments"
             binding.txtTime.text = StringFormatUtil.getElapsedTime(article.user_createdAt!!)
             binding.txtArticleTitle.text = article.media_title ?: "N/A"
-            
+            binding.btnOpenUrl.tag = position
             Glide.with(context)
                 .load(article.user_avatar)
                 .into(binding.ivUserPhoto)
 
             // Check and set media element visibility in cell.
             if (article?.media_createdAt != null) {
+                binding.btnOpenUrl.visibility = View.VISIBLE
                 binding.txtArticleTitle.visibility = View.VISIBLE
                 binding.ivArticleImage.visibility = View.VISIBLE
-                Glide.with(context)
-                    .load(article.media_image)
-                    .into(binding.ivArticleImage)
+                Glide.with(context).load(article.media_image).into(binding.ivArticleImage)
             } else {
+                binding.btnOpenUrl.visibility = View.GONE
                 binding.txtArticleTitle.visibility = View.GONE
                 binding.ivArticleImage.visibility = View.GONE
             }
         }
+    }
+
+    /**
+     * Click listener to handle open media url in external browser using Intent.
+     */
+    val onBtnOpenUrlClickEvent = View.OnClickListener { view ->
+        val position = view.tag as Int
+        val mediaUrl = articles[position].media_url
+        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(mediaUrl)))
     }
 }
