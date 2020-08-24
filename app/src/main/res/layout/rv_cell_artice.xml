@@ -19,8 +19,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_user_photo"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
             android:background="@drawable/shape_profile_circle"
             android:src="@drawable/ic_outline_account_circle_24"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:capitalize="words"
             android:text="User name"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
@@ -42,7 +42,7 @@
             android:id="@+id/txt_user_designation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:capitalize="words"
             android:text="User Designation"
             app:layout_constraintStart_toStartOf="@id/txt_user_name"
@@ -52,6 +52,7 @@
             android:id="@+id/txt_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:text="1 min"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
             app:layout_constraintEnd_toEndOf="parent"
@@ -89,10 +90,21 @@
             android:capitalize="sentences"
             android:text="Article Title Here"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@id/iv_article_image"
             app:layout_constraintStart_toStartOf="@id/iv_article_image"
             app:layout_constraintTop_toBottomOf="@id/txt_article_content" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:background="#C8C8C8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_article_title" />
 
         <View
             android:id="@+id/view"
@@ -103,7 +115,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_article_title" />
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_likes"
@@ -113,10 +125,11 @@
             android:layout_marginBottom="12dp"
             android:text="6.5K Likes"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/view"
-            app:layout_constraintStart_toStartOf="@id/iv_article_image"
-            app:layout_constraintTop_toBottomOf="@id/txt_article_title" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view2" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_comments"
@@ -124,7 +137,7 @@
             android:layout_height="wrap_content"
             android:text="34 Comments"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-            app:layout_constraintBottom_toBottomOf="@+id/txt_likes"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/view"
             app:layout_constraintTop_toTopOf="@+id/txt_likes" />
