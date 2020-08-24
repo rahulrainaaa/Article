@@ -100,24 +100,21 @@ class ArticleRecyclerViewAdapter(val context: Context, owner: LifecycleOwner) : 
             binding.txtComments.text = StringFormatUtil.formatCount(article.post_comments!!) + " Comments"
             binding.txtTime.text = StringFormatUtil.getElapsedTime(article.user_createdAt!!)
             binding.txtArticleTitle.text = article.media_title ?: "N/A"
-
-            // Hide elements if media is null.
-            if (article?.media_createdAt == null) {
-                binding.txtArticleTitle.visibility = View.GONE
-                binding.ivArticleImage.visibility = View.GONE
-            } else {
-                binding.txtArticleTitle.visibility = View.VISIBLE
-                binding.ivArticleImage.visibility = View.VISIBLE
-            }
-
             Glide.with(context)
                 .load(article.user_avatar)
                 .into(binding.ivUserPhoto)
 
-            Glide.with(context)
-                .load(article.media_image)
-                .into(binding.ivArticleImage)
-
+            // Check and set media element visibility in cell.
+            if (article?.media_createdAt != null) {
+                binding.txtArticleTitle.visibility = View.VISIBLE
+                binding.ivArticleImage.visibility = View.VISIBLE
+                Glide.with(context)
+                    .load(article.media_image)
+                    .into(binding.ivArticleImage)
+            } else {
+                binding.txtArticleTitle.visibility = View.GONE
+                binding.ivArticleImage.visibility = View.GONE
+            }
         }
     }
 }

@@ -11,17 +11,17 @@
         android:label="@string/articles"
         tools:layout="@layout/fragment_article_list">
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/BlogFragment" />
+            android:id="@+id/action_Article_List_Fragment_to_About_Us_Fragment"
+            app:destination="@id/AboutUsFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/BlogFragment"
-        android:name="com.jet2traveltech.article.ui.fragment.ArticleFragment"
-        android:label="@string/blog"
-        tools:layout="@layout/fragment_blog">
+        android:id="@+id/AboutUsFragment"
+        android:name="com.jet2traveltech.article.ui.fragment.AboutUsFragment"
+        android:label="@string/about_us"
+        tools:layout="@layout/fragment_about_us">
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            android:id="@+id/action_About_Us_to_Article_List_Fragment"
             app:destination="@id/ArticleListFragment" />
     </fragment>
 
